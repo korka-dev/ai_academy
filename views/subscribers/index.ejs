@@ -1,0 +1,44 @@
+<h2>Liste des abonnés</h2>
+
+<form action="/subscribers" method="GET" class="mb-3">
+    <div class="form-group">
+        <input type="text" name="search" class="form-control" placeholder="Rechercher par nom ou code postal">
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Rechercher</button>
+</form>
+
+<% if (subscribers.length === 0) { %>
+    <p>Aucun abonné trouvé pour cette recherche.</p>
+<% } else { %>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Code Postal</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% subscribers.forEach(subscriber => { %>
+                <tr>
+                    <td><a href="<%= `/subscribers/${subscriber._id}` %>"><%= subscriber.name %></a></td>
+                    <td><%= subscriber.email %></td>
+                    <td><%= subscriber.zipCode %></td>
+                    <td>
+                        <form action="/subscribers/<%= subscriber._id %>/delete" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                        </form>
+                        <a href="/subscribers/<%= subscriber._id %>/edit" class="btn btn-warning btn-sm">Modifier</a>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+<% } %>
+
+<a href="/subscribers/new" class="btn btn-primary">Créer un nouvel abonné</a>
+
+
+
+

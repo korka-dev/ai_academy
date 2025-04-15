@@ -1,0 +1,12 @@
+<div class="thanks-message">
+
+    <% if (notification) { %>
+        <div class="notification">
+            <p><%= notification %></p>
+        </div>
+    <% } %>
+    <h1>Merci pour votre message, <%= formData.name %> !</h1>
+    <p>Nous avons bien reçu votre message concernant le cours "<%= formData.course %>".</p>
+    <p>Nous vous répondrons à l'adresse suivante : <strong><%= formData.email %></strong>.</p>
+    <p>Votre message : <blockquote><%= formData.message %></blockquote></p>
+</div>
