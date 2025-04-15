@@ -3,10 +3,12 @@ require("dotenv").config(); // Charger les variables d'environnement
 const express = require("express");
 const layouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
-const homeController = require("./controllers/homeController");
+//const homeController = require("./controllers/homeController");
 const errorController = require("./controllers/errorController");
 const subscribersController = require("./controllers/subscribersController");
 const Subscriber = require("./models/subscriber");
+const usersController = require("./controllers/usersController");
+const coursesController = require("./controllers/coursesController");
 const session = require("express-session");
 
 // Connexion à MongoDB avec la variable d'environnement
@@ -57,7 +59,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// Définir les routes
+/* Définir les routes
 app.get("/", homeController.index);
 app.get("/about", homeController.about);
 app.get("/courses", homeController.courses);
@@ -67,6 +69,7 @@ app.get("/faq", homeController.faq);
 app.get("/thanks", (req, res) => {
     res.render("thanks", { pageTitle: "Merci" });
 });
+*/
 
 app.get("/subscribers", subscribersController.getAllSubscribers);
 app.get("/subscribers/new", subscribersController.getSubscriptionPage);
@@ -75,6 +78,31 @@ app.get("/subscribers/:id", subscribersController.show);
 app.post("/subscribers/:id/delete", subscribersController.deleteSubscriber);
 app.get("/subscribers/:id/edit", subscribersController.editSubscriber);
 app.post("/subscribers/:id/update", subscribersController.updateSubscriber);
+
+// Definir les routes des utilisateurs 
+// Ajouter le middleware method-override
+const methodOverride = require("method-override");
+app.use(methodOverride("_method", {
+methods: ["POST", "GET"]
+
+}));
+// Routes pour les utilisateurs
+app.get("/users", usersController.index, usersController.indexView);
+app.get("/users/new", usersController.new);
+app.post("/users/create", usersController.create, usersController.redirectView);
+app.get("/users/:id", usersController.show, usersController.showView);
+app.get("/users/:id/edit", usersController.edit);
+app.put("/users/:id/update", usersController.update, usersController.redirectView);
+app.delete("/users/:id/delete", usersController.delete, usersController.redirectView);
+// Routes pour les cours
+app.get("/courses", coursesController.index, coursesController.indexView);
+app.get("/courses/new", coursesController.new);
+app.post("/courses/create", coursesController.create, coursesController.redirectView);
+app.get("/courses/:id", coursesController.show, coursesController.showView);
+app.get("/courses/:id/edit", coursesController.edit);
+app.put("/courses/:id/update", coursesController.update, coursesController.redirectView);
+app.delete("/courses/:id/delete", coursesController.delete, coursesController.redirectView);
+
 
 // Gestion des erreurs
 app.use(errorController.pageNotFoundError);
