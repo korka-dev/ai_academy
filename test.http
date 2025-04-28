@@ -1,0 +1,15 @@
+### Requête GET pour récupérer les cours
+GET http://localhost:3000/api/courses
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjgwOWRlMjMwMDJkZTVhYjhmZDA3OTE0IiwiZXhwIjoxNzQ4MDcwMzgxLCJpYXQiOjE3NDU0NzgzODF9.qwo-hpNFmD3TZtTxY9RC_v3n7cGLmDVXfcBGBxKayXw
+Content-Type: application/json
+
+### Requête POST pour ajouter un abonné
+POST http://localhost:3000/api/subscribers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjgwOWRlMjMwMDJkZTVhYjhmZDA3OTE0IiwiZXhwIjoxNzQ4MDcwMzgxLCJpYXQiOjE3NDU0NzgzODF9.qwo-hpNFmD3TZtTxY9RC_v3n7cGLmDVXfcBGBxKayXw
+Content-Type: application/json
+
+{
+  "name": "Amadou korka DIALLO",
+  "email": "korka-diallo@esp.sn",
+  "zipCode": "10101"
+}
